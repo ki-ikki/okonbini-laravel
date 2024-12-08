@@ -1,0 +1,29 @@
+services:
+    okonbini-nginx:
+        container_name: "okonbini-nginx"
+        build:
+            context: ./docker/nginx
+        depends_on:
+            - okonbini-laravel
+        ports:
+            - 8080:8080
+        volumes:
+            - ./:/app
+        networks:
+            - app_net
+
+    okonbini-laravel:
+        container_name: "okonbini-laravel"
+        build:
+            context: ./docker/php
+        volumes:
+            - ./:/app
+            - /app/node_modules
+            - /app/vendor
+            - ./docker/php/php.ini:/usr/local/etc/php/php.ini
+        networks:
+            - app_net
+
+networks:
+    app_net:
+        external: true
