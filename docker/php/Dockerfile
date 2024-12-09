@@ -31,6 +31,8 @@ RUN node --version
 RUN npm --version
 RUN composer install
 RUN npm install
+RUN composer require kreait/firebase-php
+RUN composer require kreait/laravel-firebase
 
 WORKDIR /app
 ADD . /app/storage
