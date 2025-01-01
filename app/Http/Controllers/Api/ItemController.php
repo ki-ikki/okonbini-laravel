@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Item;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ItemController extends Controller
@@ -15,7 +16,7 @@ class ItemController extends Controller
         return response()->json([
             'message' => 'Authenticated user',
             'user_id' => $userId,
-            'items' => Item::all(),
+            'items' => User::all(),
         ]);
     }
 }

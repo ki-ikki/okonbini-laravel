@@ -4,6 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property int $id
+ * @property string $user_name
+ * @property string $description
+ * @property string $profile_image_url
+ * @property string $location
+ * @property \Date $date_of_birth
+ * @property \DateTime $created_at
+ * @property \DateTime $updated_at
+ * @property \DateTime $deleted_at
+ */
 class User extends \Illuminate\Database\Eloquent\Model
 {
     protected $table = 'users';
@@ -14,7 +25,6 @@ class User extends \Illuminate\Database\Eloquent\Model
 
     protected $fillable = [
         'user_name',
-        'email',
         'description',
         'profile_image_url',
         'location',
@@ -26,7 +36,6 @@ class User extends \Illuminate\Database\Eloquent\Model
 
     protected $casts = [
         'user_name' => 'string',
-        'email' => 'string',
         'description' => 'string',
         'profile_image_url' => 'string',
         'location' => 'string',
@@ -36,7 +45,7 @@ class User extends \Illuminate\Database\Eloquent\Model
         'deleted_at' => 'datetime',
     ];
 
-    public function user_auths()
+    public function userAuths()
     {
         return $this->hasOne(UserAuth::class);
     }
@@ -69,5 +78,30 @@ class User extends \Illuminate\Database\Eloquent\Model
     public function favorites()
     {
         return $this->hasMany(Favorite::class, 'user_id', 'id');
+    }
+
+    /**
+     * ユーザー情報を登録する
+     *
+     * @param String $user_name
+     * @param Date $date_of_birth
+     * @return User
+     * @throws \Exception
+     */
+    public static function create(
+        $user_name,
+        $date_of_birth
+    ) {
+        $now = new \DateTime();
+        $user = new self();
+        $user->user_name = $user_name;
+        $user->description = null;
+        $user->profile_image_url = null;
+        $user->location = null;
+        $user->date_of_birth = $date_of_birth;
+        $user->created_at = $now;
+        $user->updated_at = $now;
+        $user->save();
+        return $user;
     }
 }
