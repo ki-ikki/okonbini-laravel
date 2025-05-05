@@ -22,6 +22,7 @@ class Store extends Model
 
     protected $fillable = [
         'store_name',
+        'store_logical_name',
         'color_code',
         'is_active',
         'updated_at',
@@ -30,6 +31,7 @@ class Store extends Model
 
     protected $casts = [
         'store_name' => 'string',
+        'store_logical_name' => 'string',
         'color_code' => 'string',
         'is_active' => 'boolean',
         'updated_at' => 'datetime',

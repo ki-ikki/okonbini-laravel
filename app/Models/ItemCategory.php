@@ -12,6 +12,7 @@ class ItemCategory extends Model
 
     protected $fillable = [
         'category_name',
+        'category_label',
         'is_active',
         'created_at',
         'updated_at',
@@ -19,6 +20,7 @@ class ItemCategory extends Model
 
     protected $casts = [
         'category_name' => 'string',
+        'category_label' => 'string',
         'is_active' => 'boolean',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
